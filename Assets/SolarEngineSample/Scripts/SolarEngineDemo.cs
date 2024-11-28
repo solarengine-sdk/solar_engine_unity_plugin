@@ -37,7 +37,7 @@ public class SolarEngineDemo : MonoBehaviour
         RCConfig rc = new RCConfig();
         
         rc.enable = false;
-        rc.mergeType= RCMergeType.byDefault;
+        rc.mergeType= RCMergeType.ByDefault;
         seConfig.logEnabled = true;
         seConfig.isDebugModel = false;
      
@@ -176,21 +176,21 @@ public class SolarEngineDemo : MonoBehaviour
     {
 
         Debug.Log(SolarEngineDemoLOG+ " trackAppAtrr click");
-        AppAttributes AppAttributes = new AppAttributes();
-        AppAttributes.ad_network = "toutiao";
-        AppAttributes.sub_channel = "103300";
-        AppAttributes.ad_account_id = "1655958321988611";
-        AppAttributes.ad_account_name = "xxx科技全量18";
-        AppAttributes.ad_campaign_id = "1680711982033293";
-        AppAttributes.ad_campaign_name = "小鸭快冲计划157-1024";
-        AppAttributes.ad_offer_id = "1685219082855528";
-        AppAttributes.ad_offer_name = "小鸭快冲单元406-1024";
-        AppAttributes.ad_creative_id = "1680128668901378";
-        AppAttributes.ad_creative_name = "自动创建20210901178921";
-        AppAttributes.ad_creative_name = "自动创建20210901178921";
-        AppAttributes.attribution_platform = "se";
-        AppAttributes.customProperties = getCustomProperties();
-        SolarEngine.Analytics.trackAppAttr(AppAttributes);
+        AttAttributes attributes = new AttAttributes();
+        attributes.ad_network = "toutiao";
+        attributes.sub_channel = "103300";
+        attributes.ad_account_id = "1655958321988611";
+        attributes.ad_account_name = "xxx科技全量18";
+        attributes.ad_campaign_id = "1680711982033293";
+        attributes.ad_campaign_name = "小鸭快冲计划157-1024";
+        attributes.ad_offer_id = "1685219082855528";
+        attributes.ad_offer_name = "小鸭快冲单元406-1024";
+        attributes.ad_creative_id = "1680128668901378";
+        attributes.ad_creative_name = "自动创建20210901178921";
+        attributes.ad_creative_name = "自动创建20210901178921";
+        attributes.attribution_platform = "se";
+        attributes.customProperties = getCustomProperties();
+        SolarEngine.Analytics.trackAppAttr(attributes);
 
     }
 
@@ -205,7 +205,7 @@ public class SolarEngineDemo : MonoBehaviour
         productsAttributes.currency_type = "CNY";
         productsAttributes.order_id = "order_id";
         productsAttributes.fail_reason = "fail_reason";
-        productsAttributes.paystatus = PayStatus.success;
+        productsAttributes.paystatus = PayStatus.Success;
         productsAttributes.pay_type = "wechat";
         productsAttributes.pay_amount = 9.9;
         productsAttributes.customProperties = getCustomProperties();
@@ -216,7 +216,7 @@ public class SolarEngineDemo : MonoBehaviour
     {
         Debug.Log(SolarEngineDemoLOG+ " trackAdImpression click");
 
-        AppImpressionAttributes impressionAttributes = new AppImpressionAttributes();
+        ImpressionAttributes impressionAttributes = new ImpressionAttributes();
         impressionAttributes.ad_platform = "AdMob";
         //impressionAttributes.ad_appid = "ad_appid";
         impressionAttributes.mediation_platform = "gromore";
@@ -335,8 +335,8 @@ public class SolarEngineDemo : MonoBehaviour
     {
         Debug.Log(SolarEngineDemoLOG+ " SEUserDeleteTypeByAccountId click");
 
-        SolarEngine.Analytics.userDelete(UserDeleteType.byAccountId);
-        SolarEngine.Analytics.userDelete(UserDeleteType.byVisitorId);
+        SolarEngine.Analytics.userDelete(UserDeleteType.ByAccountId);
+        SolarEngine.Analytics.userDelete(UserDeleteType.ByVisitorId);
     }
 
 
@@ -514,8 +514,8 @@ private void SetPresetEventHandler()
         { "Preset1", "这是 Preset" },
         { "Preset2", 9.99 }
     };
-    Analytics.setPresetEvent(PresetEventType.all, propertiess);
-    Analytics.setPresetEvent(PresetEventType.appStart, null);
+    Analytics.setPresetEvent(PresetEventType.All, propertiess);
+    Analytics.setPresetEvent(PresetEventType.Start, null);
 }
 
 private void LoginHandler()
