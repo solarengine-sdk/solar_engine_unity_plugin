@@ -1,21 +1,21 @@
-#if SOLARENGINE_BYTEDANCE&&(!UNITY_EDITOR||SOLORENGINE_DEVELOPEREDITOR)
+#if SOLARENGINE_BYTEDANCE_STARK&&(!UNITY_EDITOR||SOLORENGINE_DEVELOPEREDITOR)
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using SolarEngine.MiniGames.info;
 using SolarEngine.MiniGames.Utils;
-using TTSDK;
+using StarkSDKSpace;
 using UnityEngine;
 
 namespace SolarEngine.Platform
 {
-    public class ByteDanceAdapter : SEAdapterInterface
+    public class ByteDanceStarkSDKAdapter : SEAdapterInterface
     {
        
         public SEDeviceInfo setDeviceInfo()
         {
-            var sysInfo = TT.GetSystemInfo();
+            var sysInfo = StarkSDK.API.GetSystemInfo();
             LogTool.DebugLog("sysInfo" + JsonConvert.SerializeObject(sysInfo));
             string[] tempSys = (sysInfo.system?.Split(' ')) ?? new string[0]; // 最细粒度的系统版本号
             SEDeviceInfo seDeviceInfo = new SEDeviceInfo
@@ -48,49 +48,46 @@ namespace SolarEngine.Platform
         {
             if (value.GetType() == typeof(int))
             {
-                TT.PlayerPrefs.SetInt(key, (int)value);
+                StarkSDK.API.PlayerPrefs.SetInt(key, (int)value);
             }
             else if (value.GetType() == typeof(float))
             {
 
-                TT.PlayerPrefs.SetFloat(key, (float)value);
+                StarkSDK.API.PlayerPrefs.SetFloat(key, (float)value);
             }
             else if (value.GetType() == typeof(string))
             {
 
-                TT.PlayerPrefs.SetString(key, (string)value);
+                StarkSDK.API.PlayerPrefs.SetString(key, (string)value);
             }
 
-            TT.PlayerPrefs.Save();
+            StarkSDK.API.PlayerPrefs.Save();
         }
         public bool  hasKey(string key)
         {
-           return TT.PlayerPrefs.HasKey(key);
+           return StarkSDK.API.PlayerPrefs.HasKey(key);
         }
 
-        public void clearQueue(string str)
-        {
-            TT.GetFileSystemManager().RmdirSync(Application.persistentDataPath+"/"+str);
-        }
+      
         public object getData(string key, Type type)
         {
-            if (!string.IsNullOrEmpty(key) && TT.PlayerPrefs.HasKey(key))
+            if (!string.IsNullOrEmpty(key) && StarkSDK.API.PlayerPrefs.HasKey(key))
             {
 
                 if (type == typeof(int))
                 {
-                    return TT.PlayerPrefs.GetInt(key);
+                    return StarkSDK.API.PlayerPrefs.GetInt(key);
                 }
                 else if (type == typeof(float))
                 {
-                    return TT.PlayerPrefs.GetFloat(key);
+                    return StarkSDK.API.PlayerPrefs.GetFloat(key);
                 }
                 else if (type == typeof(string))
                 {
-                    return TT.PlayerPrefs.GetString(key);
+                    return StarkSDK.API.PlayerPrefs.GetString(key);
                 }
 
-                TT.PlayerPrefs.Save();
+                StarkSDK.API.PlayerPrefs.Save();
             }
 
             return null;
@@ -101,9 +98,9 @@ namespace SolarEngine.Platform
             if (!string.IsNullOrEmpty(key))
             {
 
-                if (TT.PlayerPrefs.HasKey(key))
+                if (StarkSDK.API.PlayerPrefs.HasKey(key))
                 {
-                    TT.PlayerPrefs.DeleteKey(key);
+                    StarkSDK.API.PlayerPrefs.DeleteKey(key);
                 }
 
             }
@@ -111,13 +108,13 @@ namespace SolarEngine.Platform
 
         public void deleteAll()
         {
-            TT.PlayerPrefs.DeleteAll();
+            StarkSDK.API.PlayerPrefs.DeleteAll();
         }
 
 
         public EnterOptionsInfo getEnterOptionsInfo()
         {
-            LaunchOption launchOptionsSync = TT.GetLaunchOptionsSync();
+            LaunchOption launchOptionsSync = StarkSDK.API.GetLaunchOptionsSync();
 
             string scene = launchOptionsSync.Scene;
             Dictionary<string, object> newRefererInfo = new Dictionary<string, object>();
@@ -152,7 +149,7 @@ namespace SolarEngine.Platform
             SEAdapterInterface.OnLoginFailedCallback failedCallback, bool forceLogin = true)
         {
 
-            TT.Login(
+            StarkSDK.API.GetAccountManager(). Login(
                 (c1, c2, isLogin) => successCallback?.Invoke(c1, c2, isLogin),
                 (errMsg) => failedCallback?.Invoke(errMsg),
                 forceLogin
@@ -162,7 +159,7 @@ namespace SolarEngine.Platform
 
         public void triggerOnShow(SEAdapterInterface.OnShowEvent showEvent)
         {
-            TT.GetAppLifeCycle().OnShow += (dic) =>
+            StarkSDK.API.GetStarkAppLifeCycle().OnShowWithDict += (dic) =>
             {
               
 
@@ -211,7 +208,7 @@ namespace SolarEngine.Platform
 
         public void triggerOnHide(SEAdapterInterface.OnHideEvent hideEvent)
         {
-            TT.GetAppLifeCycle().OnHide += () =>
+            StarkSDK.API.GetStarkAppLifeCycle().OnHide += () =>
             {
                 // 触发 OnHide 事件
                 hideEvent?.Invoke();
@@ -223,13 +220,13 @@ namespace SolarEngine.Platform
             return "douyin";
         }
 
-
-    public string getsubmptype()
+      
+        public string getsubmptype()
         {
          
-              return "native";
+            return "native";
         }
-   public void init()
+        public void init()
         {
            
          

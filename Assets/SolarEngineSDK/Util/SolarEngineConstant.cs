@@ -6,7 +6,7 @@ namespace SolarEngine
 {
     public partial class Analytics : MonoBehaviour
     {
-        public static readonly string sdk_version = "1.3.0.0";
+        public static readonly string sdk_version = "1.3.0.1";
         public static readonly string SolorEngine = $"[SolarEngineSDK_Unity {sdk_version} :]";
         private static readonly string SEConstant_CHECK_ID = "_first_event_check_id";
         private static readonly string SEConstant_EVENT_TYPE = "_event_type";
@@ -81,7 +81,26 @@ namespace SolarEngine
 
         private static readonly string SEConstant_AppAttr_Ad_CustomProperties = "_customProperties";
         
+        #region 腾讯回传
+
+        private static readonly string SEConstant_ReActive_BackFlowDay = "_back_flow_day";
+        private static readonly string SEConstant_AddToWishlist_Type = "_add_to_wishlist_type";
+        private static readonly string SEConstant_Share_Target = "_mp_share_target";
+        private static readonly string SEConstant_CreateRole_RoleName = "_mp_role_name";
         
+        private static readonly string SEConstant_UpdateLevel_BeforeUpgrade = "_before_upgrade";
+        private static readonly string SEConstant_UpdateLevel_AfterUpgrade = "_after_upgrade";
+        
+           
+        public const string WishlistType_DEFAULT = "default";
+        public const string WishlistType_MY = "my";
+        public const string WishlistType_DESKTOP = "desktop";
+        public const string WishlistType_OTHERS = "others";
+
+        public const string ShareTarget_APP_MESSAGE = "APP_MESSAGE";
+        public const string ShareTarget_TIME_LINE = "TIME_LINE";
+
+        #endregion
         
     }
 }

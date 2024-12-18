@@ -32,6 +32,21 @@ public class SolarEngineDemo : MonoBehaviour
         initParams.openid = "openid";
         SEConfig seConfig = new SEConfig();
         seConfig.attAuthorizationWaitingInterval = 120;
+        
+        ///如接入腾讯广告SDK，请添加以下代码
+        TencentAdvertisingGameSDKInitParams tencentAdvertisingGameSDKInitParams = new TencentAdvertisingGameSDKInitParams();
+        
+        tencentAdvertisingGameSDKInitParams.user_action_set_id =1234567;
+        tencentAdvertisingGameSDKInitParams.secret_key = "";
+        tencentAdvertisingGameSDKInitParams.appid = "";
+        
+        
+        initParams.tencentAdvertisingGameSDKInitParams= tencentAdvertisingGameSDKInitParams;
+        
+        initParams.reportingToTencentSdk = 1;
+        initParams.isInitTencentAdvertisingGameSDK = true;
+        
+        
          seConfig.miniGameInitParams = initParams;
          
         RCConfig rc = new RCConfig();
@@ -143,6 +158,8 @@ public class SolarEngineDemo : MonoBehaviour
         RegisterAttributes.register_type = "QQ_test";
         RegisterAttributes.register_status = "success_test";
         RegisterAttributes.customProperties = getCustomProperties();
+        //接入腾讯广告SDK
+        RegisterAttributes.reportingToTencentSdk = 1;
         SolarEngine.Analytics.trackRegister(RegisterAttributes);
 
 
@@ -209,6 +226,8 @@ public class SolarEngineDemo : MonoBehaviour
         productsAttributes.pay_type = "wechat";
         productsAttributes.pay_amount = 9.9;
         productsAttributes.customProperties = getCustomProperties();
+        //接入腾讯广告SDK
+        productsAttributes.reportingToTencentSdk = 1;
         SolarEngine.Analytics.trackPurchase(productsAttributes);
     }
 
@@ -433,6 +452,19 @@ public class SolarEngineDemo : MonoBehaviour
     CreateButton("Track Ad Impression", TrackAdImpressionHandler);
     CreateButton("Track Login", TrackLoginHandler);
     CreateButton("Track Order", TrackOrderHandler);
+    
+    #if SOLARENGINE_WECHAT
+    CreateButton("trackReActive", trackReActive);
+    CreateButton("trackShare", trackShare);
+    CreateButton("trackTutorialFinish", trackTutorialFinish);
+    CreateButton("trackAddToWishlist", trackAddToWishlist);
+    CreateButton("trackViewContentMall", trackViewContentMall);
+    CreateButton("trackUpdateLevel", trackUpdateLevel);
+    CreateButton("trackCreateRole", trackCreateRole);
+    CreateButton("trackViewContentActivity", trackViewContentActivity);
+    
+    #endif
+    
     CreateButton("User Init", UserInitHandler);
     CreateButton("User Update", UserUpdateHandler);
     CreateButton("User Add", UserAddHandler);
@@ -750,6 +782,99 @@ private void AsyncFetchAllHandler()
 }
 
 
+#region 腾讯回传
+
+public void trackReActive()
+{
+    ReActiveAttributes registerData = new ReActiveAttributes
+    {
+        reportingToTencentSdk=2,
+        backFlowDay=5,
+        customProperties = new Dictionary<string, object> { { "one", "1" } }
+    };
+    SolarEngine.Analytics.trackReActive(registerData);
+}
+
+public void trackAddToWishlist()
+{
+    AddToWishlistAttributes addToWishlistData = new AddToWishlistAttributes
+    {
+        reportingToTencentSdk=1,
+        addToWishlistType = SolarEngine.Analytics.WishlistType_MY,
+        customProperties = new Dictionary<string, object> { { "one", "1" } }
+    };
+    SolarEngine.Analytics.trackAddToWishlist(addToWishlistData);
+}
+
+public void trackShare()
+{
+    ShareAttributes shareData = new ShareAttributes
+    {
+        reportingToTencentSdk=1,
+        mpShareTarget =SolarEngine.Analytics.ShareTarget_APP_MESSAGE,
+        customProperties = new Dictionary<string, object> { { "one", "1" } }
+    };
+    SolarEngine.Analytics.trackShare(shareData);
+}
+
+public void trackCreateRole()
+{
+    CreateRoleAttributes createRoleData = new CreateRoleAttributes
+    {
+        reportingToTencentSdk=1,
+        mpRoleName = "role_name",
+    };
+    SolarEngine.Analytics.trackCreateRole(createRoleData);
+}
+
+public void trackViewContentActivity()
+{
+    ViewContentActivitAttributes viewContentActivityData = new ViewContentActivitAttributes
+    {
+        reportingToTencentSdk=1,
+        customProperties = new Dictionary<string, object> { { "one", "1" } }
+    };
+    SolarEngine.Analytics.trackViewContentActivity(viewContentActivityData);
+}
+
+public void trackTutorialFinish()
+{
+    TutorialFinishAttributes tutorialFinishData = new TutorialFinishAttributes
+    {
+        reportingToTencentSdk=1,
+    };
+    SolarEngine.Analytics.trackTutorialFinish(tutorialFinishData);
+}
+
+
+public void trackUpdateLevel()
+{
+    UpdateLevelAttributes updateLevelData = new UpdateLevelAttributes
+    {
+        reportingToTencentSdk=1,
+        beforeUpgrade = 10,
+        afterUpgrade = 20,
+        customProperties = new Dictionary<string, object> { { "one", "1" } }
+    };
+    SolarEngine.Analytics.trackUpdateLevel(updateLevelData);
+}
+
+
+public void trackViewContentMall()
+{
+    ViewContentMallAttributes viewContentMallData = new ViewContentMallAttributes
+    {
+        reportingToTencentSdk=1,
+        customProperties = new Dictionary<string, object> { { "one", "1" } }
+    };
+    SolarEngine.Analytics.trackViewContentMall(viewContentMallData);
+}
+
+
+
+
+
+#endregion
 
 
 #region CallBack

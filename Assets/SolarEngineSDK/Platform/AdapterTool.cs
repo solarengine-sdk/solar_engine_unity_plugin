@@ -1,4 +1,4 @@
-#if (SOLARENGINE_BYTEDANCE||SOLARENGINE_WECHAT||SOLARENGINE_KUAISHOU)&&(!UNITY_EDITOR||SOLORENGINE_DEVELOPEREDITOR)
+#if (SOLARENGINE_BYTEDANCE||SOLARENGINE_WECHAT||SOLARENGINE_KUAISHOU||SOLARENGINE_BYTEDANCE_CLOUD||SOLARENGINE_BYTEDANCE_STARK)&&(!UNITY_EDITOR||SOLORENGINE_DEVELOPEREDITOR)
 
 using System.Collections.Generic;
 using System.Linq;
@@ -18,13 +18,23 @@ namespace SolarEngine.Platform
             {
       
 #if SOLARENGINE_WECHAT
-            SEAdapterInterface _adapter = new SolarEngine.Platform. WeChatAdapter();
+             SEAdapterInterface _adapter = new SolarEngine.Platform. WeChatAdapter();
              SESDKInfo.setAdapterWapperInterface(_adapter);
+
+             TenCentAdInterface ad = new SolarEngine.Platform.TencentAdvertisingGameSDK();
+             SESDKInfo.setTengCentInterface(ad);
+
 #elif SOLARENGINE_BYTEDANCE
                 SEAdapterInterface _adapter = new  SolarEngine.Platform.ByteDanceAdapter();
                 SESDKInfo.setAdapterWapperInterface(_adapter);
 #elif SOLARENGINE_KUAISHOU
                 SEAdapterInterface _adapter = new  KuaiShouAdapter();
+                SESDKInfo.setAdapterWapperInterface(_adapter);
+ #elif SOLARENGINE_BYTEDANCE_CLOUD
+                SEAdapterInterface _adapter = new SolarEngine.Platform.ByteDanceStarkSDKAdapter();
+                SESDKInfo.setAdapterWapperInterface(_adapter);
+#elif  SOLARENGINE_BYTEDANCE_STARK
+                SEAdapterInterface _adapter = new SolarEngine.Platform.ByteDanceStarkSDKAdapter();
                 SESDKInfo.setAdapterWapperInterface(_adapter);
 #endif
 
