@@ -1,4 +1,4 @@
-#if SOLARENGINE_BYTEDANCE_CLOUD&&(!UNITY_EDITOR||SOLORENGINE_DEVELOPEREDITOR)
+#if SOLARENGINE_BYTEDANCE_CLOUD&&(!UNITY_EDITOR||SE_DEV||SOLORENGINE_DEVELOPEREDITOR)
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -300,6 +300,17 @@ namespace SolarEngine.Platform
           else
               return "native";
         }
+
+   public string createSign(Dictionary<string,object>data)
+        {
+            return AdapterTool.createSign(data);
+        }
+
+        public string createRequestSign(Dictionary<string,object>data)
+        {
+            return AdapterTool.createRequestSign(data);
+        }
+
     }
 }
 #endif

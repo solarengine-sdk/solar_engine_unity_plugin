@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6da413d3f4ab40caaea2fb5e06dc955, type: 3}
   m_Name: SolarEngineSettings
   m_EditorClassIdentifier: 
-  _China: 1
+  _China: 0
   _Oversea: 0
   _RemoteConfig: 1
   _All: 1
@@ -20,6 +20,7 @@ MonoBehaviour:
   _Android: 1
   _MiniGame: 1
   _Oaid: 1
+  _RemoveAndroidSDK: 0
   _DeepLink: 0
   _SpecifyVersion: 0
   _iOSVersion: 

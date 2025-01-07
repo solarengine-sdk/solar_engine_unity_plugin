@@ -1,6 +1,7 @@
-#if SOLARENGINE_KUAISHOU&&(!UNITY_EDITOR||SOLORENGINE_DEVELOPEREDITOR)
+#if SOLARENGINE_KUAISHOU&&(!UNITY_EDITOR||SE_DEV)
 
 using System;
+using System.Collections.Generic;
 using KSWASM;
 using SolarEngine.MiniGames.info;
 using SolarEngine.Platform;
@@ -208,6 +209,8 @@ return;
 
     public void triggerOnShow(SEAdapterInterface.OnShowEvent showEvent)
     {
+        
+     
   #if UNITY_EDITOR
         return;
 #endif
@@ -246,6 +249,18 @@ return;
          
     
         }
+
+
+   public string createSign(Dictionary<string,object>data)
+        {
+            return AdapterTool.createSign(data);
+        }
+
+        public string createRequestSign(Dictionary<string,object>data)
+        {
+            return AdapterTool.createRequestSign(data);
+        }
+
 }
 
 #endif

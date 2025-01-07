@@ -30,6 +30,13 @@ namespace SolarEngine
             seDict.Add("isGDPRArea", config.isGDPRArea);
             seDict.Add("isEnable2GReporting", config.isEnable2GReporting);
             seDict.Add("sub_lib_version", sdk_version);
+#if TUANJIE_2022_3_OR_NEWER
+             seDict.Add("sdk_type", "tuanjie");
+ #else
+             seDict.Add("sdk_type", "unity");
+          
+#endif
+          
             seDict.Add("attAuthorizationWaitingInterval", config.attAuthorizationWaitingInterval);
             seDict.Add("caid", config.caid);
             seDict.Add("delayDeeplinkEnable", config.delayDeeplinkEnable);
@@ -998,8 +1005,9 @@ namespace SolarEngine
         public int user_action_set_id;
         public string secret_key;
         public string appid;
+        public bool tencentSdkIsAutoTrack = true;
 
-       
+
     }
     [System.Serializable]
     public struct ReActiveAttributes

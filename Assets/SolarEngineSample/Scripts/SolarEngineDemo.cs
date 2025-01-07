@@ -113,21 +113,44 @@ public class SolarEngineDemo : MonoBehaviour
     }
 
 
+    class test
+    {
+        public string user_data;
+        public string account_id;
+    
 
+    }
     public void setRemoteDefaultConfig()
     {
         SESDKRemoteConfig remoteConfig = new SESDKRemoteConfig();
-        Dictionary<string, object> defaultConfig1 = remoteConfig.stringItem("qq", "test");
-        Dictionary<string, object> defaultConfig2 = remoteConfig.jsonItem("testjson", "{\"test\":\"test\"}");
-        Dictionary<string, object> defaultConfig3 = remoteConfig.boolItem("testbool", true);
-        Dictionary<string, object> defaultConfig4 = remoteConfig.intItem("testint", 1);
-        
-        
-        Dictionary<string, object>[] defaultConfigArray = new Dictionary<string, object>[]
-            { defaultConfig1, defaultConfig2, defaultConfig3, defaultConfig4 };
-        
-        remoteConfig.SetRemoteDefaultConfig(defaultConfigArray);
 
+//t
+        test t = new test();
+        t.user_data = "test";
+        t.account_id= "test2";
+
+//list
+        List<object> list = new List<object>();
+        list.Add(1);
+        list.Add(2);
+        list.Add(3);
+
+        Dictionary<string, object> defaultConfig6 = new Dictionary<string, object>();
+        defaultConfig6.Add("name", "test");
+        defaultConfig6.Add("age", 1);
+        defaultConfig6.Add("t", t);
+        defaultConfig6.Add("list", list);
+
+
+
+        SESDKRemoteConfig.Item itemString = remoteConfig.stringItem("test", "test");
+        SESDKRemoteConfig.Item itemJson = remoteConfig.jsonItem("testjson", defaultConfig6);
+        SESDKRemoteConfig.Item itemBool = remoteConfig.boolItem("testbool", true);
+        SESDKRemoteConfig.Item itemInt = remoteConfig.intItem("testint", 1);
+        SESDKRemoteConfig.Item[] defaultConfigArray= new SESDKRemoteConfig.Item[]{itemString,itemJson,itemBool,itemInt};
+
+
+        remoteConfig.SetRemoteDefaultConfig(defaultConfigArray);
     }
 
  

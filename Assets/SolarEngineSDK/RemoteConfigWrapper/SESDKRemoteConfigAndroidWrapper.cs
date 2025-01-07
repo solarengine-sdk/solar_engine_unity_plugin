@@ -1,4 +1,4 @@
-﻿#if UNITY_ANDROID&&!UNITY_EDITOR&&!SOLARENGINE_BYTEDANCE&&!SOLARENGINE_BYTEDANCE_CLOUD
+﻿#if UNITY_ANDROID&&!UNITY_EDITOR&&!SOLARENGINE_BYTEDANCE&&!SOLARENGINE_BYTEDANCE_CLOUD&&!SOLARENGINE_BYTEDANCE_STARK&&!SE_DIS_RC
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,7 +15,7 @@ namespace SolarEngine
 
         protected static AndroidJavaClass SeRemoteConfigAndroidSDK = new AndroidJavaClass("com.reyun.se.remote.config.unity.bridge.UnityAndroidSeRemoteConfigManager");
 
-        private void SESDKSetRemoteDefaultConfig(Dictionary<string, object>[] defaultConfig)
+        private void SESDKSetRemoteDefaultConfig(Item[] defaultConfig)
         {
 
             if (defaultConfig == null)

@@ -1,4 +1,4 @@
-#if SOLARENGINE_BYTEDANCE_STARK&&(!UNITY_EDITOR||SOLORENGINE_DEVELOPEREDITOR)
+#if SOLARENGINE_BYTEDANCE_STARK&&(!UNITY_EDITOR||SE_DEV)
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -232,6 +232,16 @@ namespace SolarEngine.Platform
          
     
         }
+   public string createSign(Dictionary<string,object>data)
+        {
+            return AdapterTool.createSign(data);
+        }
+
+        public string createRequestSign(Dictionary<string,object>data)
+        {
+            return AdapterTool.createRequestSign(data);
+        }
+
     }
 }
 #endif
