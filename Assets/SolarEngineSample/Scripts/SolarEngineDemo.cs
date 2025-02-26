@@ -31,7 +31,7 @@ public class SolarEngineDemo : MonoBehaviour
         initParams.unionid = "unionid";
         initParams.openid = "openid";
         SEConfig seConfig = new SEConfig();
-        seConfig.attAuthorizationWaitingInterval = 120;
+     
         
         ///如接入腾讯广告SDK，请添加以下代码
         TencentAdvertisingGameSDKInitParams tencentAdvertisingGameSDKInitParams = new TencentAdvertisingGameSDKInitParams();
@@ -904,7 +904,6 @@ public void trackViewContentMall()
 
 private void handleSchemeUrl(string url)
 {
-    //将url传递给SDK，注意此步骤一定要在SDK初始化成功之后执行，否则不生效，可参考下放添加deeplink回调示例使用方法
     SolarEngine.Analytics.handleDeepLinkUrl(url);
 }
 
