@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: SolarEngineSettings
   m_EditorClassIdentifier: 
   _China: 0
-  _Oversea: 0
+  _Oversea: 1
   _RemoteConfig: 1
   _All: 1
   _iOS: 1
   _Android: 1
   _MiniGame: 1
-  _Oaid: 1
+  _Oaid: 0
   _RemoveAndroidSDK: 0
   _DeepLink: 0
   _SpecifyVersion: 0

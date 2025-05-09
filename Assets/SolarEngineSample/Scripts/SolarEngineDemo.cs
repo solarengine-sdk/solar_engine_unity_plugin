@@ -23,7 +23,7 @@ public class SolarEngineDemo : MonoBehaviour
 
         Debug.Log(SolarEngineDemoLOG+" init click");
      
-       String AppKey = "";
+       String AppKey = "e78185651df3202f";
       
     
         MiniGameInitParams initParams = new MiniGameInitParams();
@@ -47,13 +47,13 @@ public class SolarEngineDemo : MonoBehaviour
         initParams.isInitTencentAdvertisingGameSDK = true;
         
         
-         seConfig.miniGameInitParams = initParams;
+        seConfig.miniGameInitParams = initParams;
          
         RCConfig rc = new RCConfig();
         
         rc.enable = false;
         rc.mergeType= RCMergeType.ByDefault;
-        seConfig.logEnabled = true;
+        seConfig.logEnabled = false;
         seConfig.isDebugModel = false;
      
         //delayDeeplinkEnable
