@@ -161,11 +161,11 @@ namespace SolarEngine
 
       
 
-        private static void GetDistinctId(Action<Distinct> distinct)
+        private static string GetDistinctId()
         {
-            Action<SolarEngine.MiniGames.info.Distinct> miniGamesDistinctAction = (arg) => distinct?.Invoke(ConvertToCustomDistinct(arg));
+            // Action<SolarEngine.MiniGames.info.Distinct> miniGamesDistinctAction = (arg) => distinct?.Invoke(ConvertToCustomDistinct(arg));
 
-            SolarEngineSDK4MiniGames.getDistinct(miniGamesDistinctAction);
+         return   SolarEngineSDK4MiniGames.getDistinct();
         }
         private static Distinct ConvertToCustomDistinct(SolarEngine.MiniGames.info.Distinct source)
         {
@@ -382,6 +382,10 @@ namespace SolarEngine
         {
             Debug.Log($"{SolorEngine}Only Android can use , minigame not support");
         }
+        private static void TrackAppReEngagement(Dictionary<string, object> attributes)
+         {
+             Debug.Log($"{SolorEngine}miniGame not support  TrackAppReEngagement");
+         }
 
         #region  not support function
 
@@ -395,11 +399,7 @@ namespace SolarEngine
               Debug.Log($"{SolorEngine}MiniGame not support");
         }
 
-        private static string GetDistinctId()
-        {
-              Debug.Log($"{SolorEngine}MiniGame not support");
-            return "";
-        }
+   
         private static void RequestTrackingAuthorizationWithCompletionHandler(SESDKATTCompletedCallback callback) {
                Debug.Log($"{SolorEngine}Current on MiniGame,requestTrackingAuthorizationWithCompletionHandler only iOS");
          }

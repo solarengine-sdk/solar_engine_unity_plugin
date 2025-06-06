@@ -217,7 +217,11 @@ namespace SolarEngine
         {
               Debug.Log($"{SolorEngine}Unity Editor: ReportEventImmediately");
         }
-
+        private static void TrackAppReEngagement(Dictionary<string, object> attributes)
+        {
+            Debug.Log($"{SolorEngine}Unity Editor: TrackAppReEngagement");
+        }
+        
         private static void HandleDeepLinkUrl(string url)
         {
               Debug.Log($"{SolorEngine}Unity Editor: HandleDeepLinkUrl not found");
@@ -322,7 +326,9 @@ namespace SolarEngine
 
         private static void TrackViewContentActivity(ViewContentActivitAttributes attributes)
         {
- Debug.Log($"{SolorEngine}Unity Editor: TrackViewContentActivity");        }
+ Debug.Log($"{SolorEngine}Unity Editor: TrackViewContentActivity");
+ 
+        }
         
 
         #endregion

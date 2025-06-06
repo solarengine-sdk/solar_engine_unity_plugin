@@ -40,7 +40,8 @@ namespace SolarEngine
 		private bool _Android=true;
 		[SerializeField]
 		private bool _MiniGame=true;
-		
+		[SerializeField]
+		private bool _OpenHarmony=true;
 		[SerializeField]
 		private bool _Oaid=true;
 		
@@ -64,6 +65,8 @@ namespace SolarEngine
 		private string _iOSVersion;
 		[SerializeField]
 		private string _AndroidVersion;
+		[SerializeField]
+		private string _OpenHarmonyVersion;
 		[SerializeField]
 		private string _iOSUrlIdentifier;
 		[SerializeField]
@@ -154,6 +157,11 @@ namespace SolarEngine
 			get{return  Instance._MiniGame;}
 		
 		}
+		public static bool isUseOpenHarmony
+		{
+			get{return  Instance._OpenHarmony;}
+			
+		}
 
 		public static bool isUseAndroid
 		{
@@ -194,6 +202,12 @@ namespace SolarEngine
 		{
 			get{return  Instance._AndroidVersion;}
 			set{Instance._AndroidVersion = value;}
+		}
+
+		public static string OpenHarmonyVersion
+		{
+			get{ return Instance._OpenHarmonyVersion;}
+			set{ Instance._OpenHarmonyVersion = value;}
 		}
 		#if UNITY_EDITOR
 		[MenuItem("SolarEngineSDK/SDK Edit Settings", false, 0)]

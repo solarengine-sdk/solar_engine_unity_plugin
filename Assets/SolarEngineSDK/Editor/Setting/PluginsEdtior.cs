@@ -38,6 +38,9 @@ public class PluginsEdtior : MonoBehaviour
    //minigamepath
     private const string MiniGameRemoteConfigsPathMiniCS = "Assets/SolarEngineSDK/RemoteConfigWrapper/SESDKRemoteConfigMiniGameWrapper.cs";
    private const string MiniGameRemoteConfigsPathMiniDll = PluginsSolarEnginePath+"MiniGame/MiniGameRemoteConfig.dll";
+   
+   private const string RemoteConfigsPathOpenHarCS = "Assets/SolarEngineSDK/RemoteConfigWrapper/SESDKRemoteConfigOpenHarmonyWrapper.cs";
+   private const string RemoteConfigsPathOpenHar = "Assets/Plugins/OpenHarmony/SolarEngine/RemoteConfig";
 
    
    //iospath
@@ -119,7 +122,32 @@ public class PluginsEdtior : MonoBehaviour
         && ShowFile(MiniGameRemoteConfigsPathMiniCS);
 
    }
-  // [MenuItem(DisableiOS, false, 0)]
+   public static bool showOpenHarmony()
+   {
+#if TUANJIE_2022_3_OR_NEWER
+
+       DefineSymbolsEditor.delete_DISABLE_REMOTECONFIG(BuildTargetGroup.OpenHarmony,false);
+#endif
+       return  ShowPath(RemoteConfigsPathOpenHar)&&ShowFile(RemoteConfigsPathOpenHarCS) ;
+
+   }
+   public static bool disableOpenHarmony()
+   {
+#if TUANJIE_2022_3_OR_NEWER
+
+       DefineSymbolsEditor.add_DISABLE_REMOTECONFIG(BuildTargetGroup.OpenHarmony,false);
+#endif
+       return HidePath(RemoteConfigsPathOpenHar)&&HideFile(RemoteConfigsPathOpenHarCS);
+    
+   }
+
+
+
+
+
+
+
+   // [MenuItem(DisableiOS, false, 0)]
    public static bool disableiOS ()
    {
        DefineSymbolsEditor.add_DISABLE_REMOTECONFIG(BuildTargetGroup.iOS,false);
