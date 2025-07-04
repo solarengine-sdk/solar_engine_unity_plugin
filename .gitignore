@@ -90,3 +90,5 @@ Thumbs.db
 Assets/Plugins/Android
 .utmp
 .vscode
+Assets/WebGLTemplates
+Assets/WX-WASM-SDK-V2
