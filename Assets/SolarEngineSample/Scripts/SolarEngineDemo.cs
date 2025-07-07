@@ -74,7 +74,7 @@ public class SolarEngineDemo : MonoBehaviour
      
         //delayDeeplinkEnable
         seConfig.delayDeeplinkEnable = true;  
-seConfig.deferredDeeplinkenable=true;     
+       seConfig.deferredDeeplinkenable=true;     
          setDelayDeeplinkCompletionHandler();
         
         Analytics.deeplinkCompletionHandler(deeplinkCallback);
@@ -647,7 +647,7 @@ private void SetVisitorIdHandler()
 }
 private void RequestPermissionsFromUserHandler()
 {
-#if UNITY_OPENHARMONY&&!UNITY_EDITOR&&!SE_DIS_RC
+#if UNITY_OPENHARMONY&&!UNITY_EDITOR
 
     SolarEngine.Analytics.requestPermissionsFromUser(callback);
 #endif
@@ -681,6 +681,7 @@ private void GetDistinctIdHandler()
     #else
   
     Debug.Log(SolarEngineDemoLOG+"getDistinctId : " +   Analytics.getDistinctId());
+    string distinctId = Analytics.getDistinctId();
 
 #endif
     
