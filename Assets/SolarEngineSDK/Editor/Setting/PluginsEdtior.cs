@@ -34,6 +34,7 @@ public class PluginsEdtior : MonoBehaviour
    
    
    private const string oaidPath = SolarEngineNet+"SolarEnginePlugins/Oaid";
+   private const string odminfoPath = SolarEngineNet+"SolarEnginePlugins/ODMInfo";
    
    //minigamepath
     private const string MiniGameRemoteConfigsPathMiniCS = "Assets/SolarEngineSDK/RemoteConfigWrapper/SESDKRemoteConfigMiniGameWrapper.cs";
@@ -166,7 +167,18 @@ public class PluginsEdtior : MonoBehaviour
        ShowFile(RemoteConfigsPathiOSH)&&
        ShowPath(RemoteConfigsPathiOSXml);
    }
+
+   public static void disableMacOS()
+   {
+       DefineSymbolsEditor.add_DISABLE_REMOTECONFIG(BuildTargetGroup.Standalone,false);
+
+   }
    
+   public static void showMacOS ()
+   {
+       DefineSymbolsEditor.delete_DISABLE_REMOTECONFIG(BuildTargetGroup.Standalone,false);
+     
+   }
    
   // [MenuItem(DisableAndroid, false, 0)]
    public static bool disableAndroid ()
@@ -197,8 +209,18 @@ public class PluginsEdtior : MonoBehaviour
    {
      return  ShowPath(oaidPath);
    }
-
    
+   
+
+   public static bool disableODMInfo()
+   {
+       return HidePath(odminfoPath);
+   }
+   public static bool showODMInfo()
+   {
+       return  ShowPath(odminfoPath);
+   }
+
  
    public static bool HideFile(string path)
    {

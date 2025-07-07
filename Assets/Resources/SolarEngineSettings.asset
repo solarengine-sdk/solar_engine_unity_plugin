@@ -9,22 +9,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6da413d3f4ab40caaea2fb5e06dc955, type: 3}
+  m_Script: {fileID: 11500000, guid: 9870689280f3945929579577b1a89b51, type: 3}
   m_Name: SolarEngineSettings
   m_EditorClassIdentifier: 
-  _China: 1
-  _Oversea: 0
+  _China: 0
+  _Oversea: 1
   _RemoteConfig: 1
   _All: 1
   _iOS: 1
   _Android: 1
   _MiniGame: 1
-  _Oaid: 1
+  _OpenHarmony: 1
+  _MacOS: 1
+  _Oaid: 0
+  _ODMInfo: 1
   _RemoveAndroidSDK: 0
   _DeepLink: 0
   _SpecifyVersion: 0
   _iOSVersion: 
   _AndroidVersion: 
+  _OpenHarmonyVersion: 
+  _MacOSVersion: 
   _iOSUrlIdentifier: 
   _iOSUrlSchemes: []
   _iOSUniversalLinksDomains: []

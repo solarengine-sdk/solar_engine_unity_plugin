@@ -262,3 +262,171 @@ namespace SolarEngine
 }
 
 #endif
+
+
+#if UNITY_STANDALONE_OSX
+
+using System.Collections.Generic;
+using System.Diagnostics;
+using UnityEditor;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using UnityEditor.Callbacks;
+using Debug = UnityEngine.Debug;
+
+
+namespace SolarEngine
+{
+
+	public class InstallSdkInXcode
+	{
+
+
+		const string POD_SESDKRemoteConfig = "SESDKRemoteConfig";
+		const string POD_SolarEngineSDK = "SolarEngineSDK";
+		
+		 const string POD_SolarEngineInterSDK = "SolarEngineSDKiOSInter";
+
+		const string POD_VERSION = ">=0";
+		
+		
+		public static string GetMacOSVersion()
+		{
+			return string.IsNullOrEmpty(SolarEngineSettings.MacOSVersion) ? POD_VERSION : SolarEngineSettings.MacOSVersion;
+		}
+		public static string GetSolarEngineSDK ()
+		{
+			return SolarEngineSettings.isCN ? POD_SolarEngineSDK : POD_SolarEngineInterSDK;
+		}
+		[PostProcessBuild]
+		public static void RunPostBuildScript(BuildTarget target, string pathToBuiltProject)
+		{
+			if (target == BuildTarget.StandaloneOSX)
+			{
+				string podfilePath = Path.Combine(pathToBuiltProject, "Podfile");
+
+				// Step 1: pod init（如果没有 Podfile 才执行）
+				if (!File.Exists(podfilePath))
+				{
+
+					Debug.Log("[SolarEngine]:Podfile not found, running pod init...");
+					ExecuteShellCommand("pod", "init", pathToBuiltProject);
+				}
+				else
+				{
+					Debug.Log("[SolarEngine]:Podfile already exists, skipping pod init.");
+				}
+
+				// Step 2: 注入依赖（如果未注入）
+				InjectPodsIntoPodfile(pathToBuiltProject);
+
+				// Step 3: 执行 pod install
+				ExecuteShellCommand("pod", "install", pathToBuiltProject);
+			}
+		}
+		private static void ExecuteShellCommand(string command, string args, string workingDirectory)
+		{
+			var process = new System.Diagnostics.Process();
+
+			process.StartInfo.FileName = "/bin/bash";
+			process.StartInfo.Arguments =
+				$"-c \"export LANG=en_US.UTF-8; export PATH=/opt/homebrew/bin:/usr/local/bin:$PATH; cd '{workingDirectory}'; {command} {args}\"";
+
+			process.StartInfo.RedirectStandardOutput = true;
+			process.StartInfo.RedirectStandardError = true;
+			process.StartInfo.UseShellExecute = false;
+			process.StartInfo.CreateNoWindow = true;
+
+			process.Start();
+
+			string output = process.StandardOutput.ReadToEnd();
+			string error = process.StandardError.ReadToEnd();
+
+			process.WaitForExit();
+
+			Debug.Log($"[SolarEngine]:[Shell] Output:\n{output}");
+			if (!string.IsNullOrEmpty(error))
+			{
+				Debug.LogWarning($"[SolarEngine]:[Shell] Error:\n{error}");
+			}
+		}
+		private static void InjectPodsIntoPodfile(string directory)
+		{
+			string podfilePath = Path.Combine(directory, "Podfile");
+			if (!File.Exists(podfilePath))
+			{
+				Debug.LogError("❌[SolarEngine]: Podfile does not exist at: " + podfilePath);
+				return;
+			}
+
+			string macOSVersion = "12.0"; // 可替换为从 Unity 中读取的版本
+			string platformLine = $"platform :macos, '{macOSVersion}'";
+
+			var originalLines = File.ReadAllLines(podfilePath).ToList();
+			var modifiedLines = new List<string>();
+
+			bool platformSet = false;
+			bool podsInjected = false;
+
+			foreach (var line in originalLines)
+			{
+				string trimmed = line.Trim();
+
+				// 替换 platform 行
+				if (trimmed.StartsWith("platform"))
+				{
+					modifiedLines.Add(platformLine);
+					platformSet = true;
+					continue;
+				}
+				else if (!platformSet && trimmed.StartsWith("# platform"))
+				{
+					modifiedLines.Add(platformLine);
+					platformSet = true;
+					continue;
+				}
+
+				// 删除原有 pod 行
+				if (trimmed.StartsWith($"pod '{POD_SolarEngineInterSDK}'") || trimmed.StartsWith($"pod '{POD_SolarEngineSDK}'")|| trimmed.StartsWith($"pod '{POD_SESDKRemoteConfig}'"))
+				{
+					continue; // 跳过旧的声明
+				}
+
+				// 在 end 前插入统一的 pod 声明
+
+				
+				if (trimmed == "end" && !podsInjected)
+				{
+					modifiedLines.Add($"  pod '{GetSolarEngineSDK()}', '{GetMacOSVersion()}'");
+					if (SolarEngineSettings.isUseMacOS)
+					{
+						modifiedLines.Add($"  pod '{POD_SESDKRemoteConfig}', '{GetMacOSVersion()}'");
+					}
+					podsInjected = true;
+				}
+
+				modifiedLines.Add(line);
+			}
+
+			if (!platformSet)
+			{
+				modifiedLines.Insert(0, platformLine);
+			}
+
+			File.WriteAllLines(podfilePath, modifiedLines);
+			Debug.Log("✅ [SolarEngine]:Podfile cleaned and re-injected with updated pod dependencies.");
+		}
+	}
+}
+
+
+
+
+#endif
+
+
+
+
+

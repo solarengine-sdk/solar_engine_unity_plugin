@@ -73,13 +73,14 @@ public class SolarEngineDemo : MonoBehaviour
         
      
         //delayDeeplinkEnable
-        seConfig.delayDeeplinkEnable = true;       
+        seConfig.delayDeeplinkEnable = true;  
+seConfig.deferredDeeplinkenable=true;     
          setDelayDeeplinkCompletionHandler();
         
         Analytics.deeplinkCompletionHandler(deeplinkCallback);
         Analytics.delayDeeplinkCompletionHandler(delayDeeplinkCallback);
         
-      
+     //   Analytics.deferredDeeplinkCompletionHandler();
 
      
         //如果是在2022版本上开发者可以通过以下方式获取deeplink url并传递给SDK
@@ -92,7 +93,7 @@ public class SolarEngineDemo : MonoBehaviour
         seConfig.initCompletedCallback = initCallback;
       
         SolarEngine.Analytics.preInitSeSdk(AppKey);
-        SolarEngine.Analytics.initSeSdk(AppKey, seConfig,rc);
+        SolarEngine.Analytics.initSeSdk(AppKey, seConfig);
        // SolarEngine.Analytics.initSeSdk(AppKey);
         setRemoteDefaultConfig();
       //  handleSchemeUrl(uri);

@@ -43,7 +43,12 @@ namespace SolarEngine
 		[SerializeField]
 		private bool _OpenHarmony=true;
 		[SerializeField]
+		private bool _MacOS=true;
+		[SerializeField]
 		private bool _Oaid=true;
+		[SerializeField]
+		private bool _ODMInfo=false;
+		
 		
 		
 		// [SerializeField]
@@ -67,6 +72,8 @@ namespace SolarEngine
 		private string _AndroidVersion;
 		[SerializeField]
 		private string _OpenHarmonyVersion;
+		[SerializeField]
+		private string _MacOSVersion;
 		[SerializeField]
 		private string _iOSUrlIdentifier;
 		[SerializeField]
@@ -162,6 +169,11 @@ namespace SolarEngine
 			get{return  Instance._OpenHarmony;}
 			
 		}
+		public static bool isUseMacOS
+		{
+			get{return  Instance._MacOS;}
+			
+		}
 
 		public static bool isUseAndroid
 		{
@@ -187,6 +199,11 @@ namespace SolarEngine
 			set{Instance._Oaid = value;}
 			
 		}
+		public static bool isUseODMInfo
+		{
+			get{return  Instance._ODMInfo;}
+			set{Instance._ODMInfo = value;}
+		}
 		public static bool isSpecifyVersio
 		{
 			get{return  Instance._SpecifyVersion;}
@@ -208,6 +225,11 @@ namespace SolarEngine
 		{
 			get{ return Instance._OpenHarmonyVersion;}
 			set{ Instance._OpenHarmonyVersion = value;}
+		}
+		public static string MacOSVersion
+		{
+			get{ return Instance._MacOSVersion;}
+			set{ Instance._MacOSVersion = value;}
 		}
 		#if UNITY_EDITOR
 		[MenuItem("SolarEngineSDK/SDK Edit Settings", false, 0)]
