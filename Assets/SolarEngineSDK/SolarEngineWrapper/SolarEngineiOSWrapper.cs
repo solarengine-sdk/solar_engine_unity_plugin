@@ -10,7 +10,7 @@ using UnityEngine;
 namespace SolarEngine
 {
     public partial class Analytics : MonoBehaviour
-    {e
+    {
         private static Dictionary<string, object> GetPresetProperties()
         {
 
