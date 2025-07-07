@@ -93,7 +93,7 @@ seConfig.deferredDeeplinkenable=true;
         seConfig.initCompletedCallback = initCallback;
       
         SolarEngine.Analytics.preInitSeSdk(AppKey);
-        SolarEngine.Analytics.initSeSdk(AppKey, seConfig);
+        SolarEngine.Analytics.initSeSdk(AppKey, seConfig, rc);
        // SolarEngine.Analytics.initSeSdk(AppKey);
         setRemoteDefaultConfig();
       //  handleSchemeUrl(uri);
@@ -660,7 +660,7 @@ private void callback(int code)
 
 private void GetVisitorIdHandler()
 {
-#if UNITY_OPENHARMONY&&!UNITY_EDITOR&&!SE_DIS_RC
+#if UNITY_OPENHARMONY&&!UNITY_EDITOR
 
 Analytics.getVisitorId(getVisitorId);
  #else
@@ -1071,10 +1071,9 @@ private void onFetchRemoteConfigCallback(Dictionary<string, object> result)
     Debug.Log(SolarEngineDemoLOG+str);
 }
 
-
 private void _distinct(string distinct)
 {
-    Debug.Log(string.Format(SolarEngineDemoLOG+"distinct_id: {0} \n ", distinct));
+    Debug.Log(string.Format("distinct_id: {0}  ", distinct));
 }
 
 
