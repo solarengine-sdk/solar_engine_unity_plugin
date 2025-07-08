@@ -94,7 +94,6 @@ public class SolarEngineDemo : MonoBehaviour
       
         SolarEngine.Analytics.preInitSeSdk(AppKey);
         SolarEngine.Analytics.initSeSdk(AppKey, seConfig, rc);
-       // SolarEngine.Analytics.initSeSdk(AppKey);
         setRemoteDefaultConfig();
       //  handleSchemeUrl(uri);
       
@@ -259,7 +258,7 @@ public class SolarEngineDemo : MonoBehaviour
 
     }
     
-    public void trackAppReEngagement()
+    public void TrackAppReEngagement()
     {
 
       Dictionary<string,object>  attributes = getCustomProperties();
@@ -337,22 +336,8 @@ public class SolarEngineDemo : MonoBehaviour
         SolarEngine.Analytics.trackOrder(OrderAttributes);
 
     }
-
-
-    public void userInit()
-    {
-        Debug.Log(SolarEngineDemoLOG + " userInit click");
-
-        Dictionary<string, object> userProperties = new Dictionary<string, object>();
-        userProperties.Add("K111", "V1");
-        userProperties.Add("K211", "V2");
-        userProperties.Add("K311", 2);
-        string[] arr = new string[] { "狐狸", "四叶草" };
-
-        userProperties.Add("Kj1", arr);
-        SolarEngine.Analytics.userInit(userProperties);
-
-
+    public void TrackFirstEvent()
+    { 
         RegisterAttributes RegisterAttributes = new RegisterAttributes();
         RegisterAttributes.register_type = "QQ_test";
         RegisterAttributes.register_status = "success_test";
@@ -373,6 +358,24 @@ public class SolarEngineDemo : MonoBehaviour
         custom.checkId = "aaa";
    
         SolarEngine.Analytics.trackFirstEvent(custom);
+    }
+
+
+    public void userInit()
+    {
+        Debug.Log(SolarEngineDemoLOG + " userInit click");
+
+        Dictionary<string, object> userProperties = new Dictionary<string, object>();
+        userProperties.Add("K111", "V1");
+        userProperties.Add("K211", "V2");
+        userProperties.Add("K311", 2);
+        string[] arr = new string[] { "狐狸", "四叶草" };
+
+        userProperties.Add("Kj1", arr);
+        SolarEngine.Analytics.userInit(userProperties);
+
+
+      
 
     }
 
@@ -447,6 +450,8 @@ public class SolarEngineDemo : MonoBehaviour
         {
             // foreach (var VARIABLE in attribution)
             // {
+            if(attribution!=null)
+                
                 Debug.Log(SolarEngineDemoLOG+ " attribution : " + JsonConvert.SerializeObject(attribution));
             //}
         }
@@ -526,7 +531,8 @@ public class SolarEngineDemo : MonoBehaviour
     CreateButton("Track Ad Impression", TrackAdImpressionHandler);
     CreateButton("Track Login", TrackLoginHandler);
     CreateButton("Track Order", TrackOrderHandler);
-    CreateButton("Track AppReEngagement", trackAppReEngagement);
+    CreateButton("Track AppReEngagement", TrackAppReEngagement);
+    CreateButton("Track FirstEvent", TrackFirstEvent);
     
     #if SOLARENGINE_WECHAT
     CreateButton("trackReActive", trackReActive);
