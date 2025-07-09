@@ -287,7 +287,7 @@ public class SolarEngineDemo : MonoBehaviour
         productsAttributes.reportingToTencentSdk = 1;
         Debug.Log(SolarEngineDemoLOG + "trackPurchase"+JsonConvert.SerializeObject(productsAttributes));
 
-        // SolarEngine.Analytics.track(productsAttributes);
+         SolarEngine.Analytics.trackPurchase(productsAttributes);
     }
 
     public void trackAdImpression()
@@ -512,6 +512,8 @@ public class SolarEngineDemo : MonoBehaviour
     CreateButton("Unset Super Property", UnsetSuperPropertyHandler);
     CreateButton("Clear Super Properties", ClearSuperPropertiesHandler);
     CreateButton("Report Immediately", ReportEventImmediatelyHandler);
+    CreateButton("GetPresetProperties", GetPresetPropertiesHandler);
+
     CreateButton("GetAttribution", GetAttributionHandler);
     CreateButton("SetChannel", SetChannelAgainHandler);
     CreateButton("SetGaids", SetGaidHandler);
@@ -519,7 +521,6 @@ public class SolarEngineDemo : MonoBehaviour
 
     CreateButton("SetReferrerTitle", SetReferrerTitleHandler);
     CreateButton("SetXcxPageTitle", SetXcxPageTitleHandler);
-    CreateButton("GetPresetProperties", GetPresetPropertiesHandler);
     GUILayout.EndVertical();
 
     GUILayout.BeginVertical();
@@ -684,7 +685,7 @@ private void GetDistinctIdHandler()
 #if UNITY_OPENHARMONY&&!UNITY_EDITOR
 
     Analytics.getDistinctId(_distinct);
-    #else
+#else
   
     Debug.Log(SolarEngineDemoLOG+"getDistinctId : " +   Analytics.getDistinctId());
     string distinctId = Analytics.getDistinctId();
