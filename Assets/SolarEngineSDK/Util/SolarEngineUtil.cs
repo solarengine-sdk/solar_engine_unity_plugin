@@ -43,7 +43,11 @@ namespace SolarEngine
              seDict.Add("sdk_type", "unity");
           
 #endif
-            seDict.Add("fbAppID", config.fbAppID);
+            if (!string.IsNullOrEmpty(config.fbAppID))
+            {
+                seDict.Add("fbAppID", config.fbAppID);
+            }
+          
             seDict.Add("attAuthorizationWaitingInterval", config.attAuthorizationWaitingInterval);
             seDict.Add("caid", config.caid);
             
@@ -741,7 +745,7 @@ namespace SolarEngine
         public bool isEnable2GReporting { get; set; }
 
         // 是否开启延迟deeplink。默认为false，可选字段
-        [Obsolete("delayDeeplinkEnable is obsolete. Please enableDeferredDeeplink.")]
+        [Obsolete("delayDeeplinkEnable is obsolete. Please use deferredDeeplinkenable.")]
 
         public bool delayDeeplinkEnable {
             get => _deferredDeeplinkEnabled;
