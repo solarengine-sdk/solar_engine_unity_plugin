@@ -14,5 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCN: 0
   isOversea: 1
-  isUseOaid: 0
   isUseODMInfo: 1

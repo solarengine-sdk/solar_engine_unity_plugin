@@ -12,25 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9870689280f3945929579577b1a89b51, type: 3}
   m_Name: SolarEngineSettings
   m_EditorClassIdentifier: 
+  _OptionalFeatures: 1
   _China: 0
   _Oversea: 1
-  _RemoteConfig: 1
   _All: 1
   _iOS: 1
   _Android: 1
   _MiniGame: 1
   _OpenHarmony: 1
-  _MacOS: 1
-  _Oaid: 0
+  _Oaid: 1
   _ODMInfo: 1
   _RemoveAndroidSDK: 0
   _DeepLink: 0
-  _SpecifyVersion: 0
-  _iOSVersion: 
-  _AndroidVersion: 
-  _OpenHarmonyVersion: 
-  _MacOSVersion: 
   _iOSUrlIdentifier: 
   _iOSUrlSchemes: []
   _iOSUniversalLinksDomains: []
   _AndroidUrlSchemes: []
+  _SpecifyVersion: 0
+  _iOSVersion: 
+  _AndroidVersion: 
+  _OpenHarmonyVersion: 

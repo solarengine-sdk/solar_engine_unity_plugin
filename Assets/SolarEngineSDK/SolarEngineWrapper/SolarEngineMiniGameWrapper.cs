@@ -18,6 +18,9 @@ namespace SolarEngine
     public partial class Analytics : MonoBehaviour
     {
      
+        // private static SESDKInitCompletedCallback initCompletedCallback_miniGame;
+        // private static SEAttributionCallback attCompletedCallback_miniGame;
+        
         private static Dictionary<string, object> GetPresetProperties()
         {
             return SolarEngineSDK4MiniGames.getPresetProperties();
@@ -39,7 +42,7 @@ namespace SolarEngine
         {
            
             MiniGameRCConfig minircConfig = new MiniGameRCConfig();
-            minircConfig.enable = rcConfig.enable;
+            minircConfig.enable = rcConfigEnable(rcConfig);
             minircConfig.mergeType = (MiniRCMergeType)(int)rcConfig.mergeType;
             minircConfig.customIDEventProperties = rcConfig.customIDEventProperties;
             minircConfig.customIDProperties = rcConfig.customIDProperties;
@@ -48,8 +51,20 @@ namespace SolarEngine
             SolarEngineSDK4MiniGames.init(appKey, initSDKInitParams(config), minircConfig);
         }
 
+        // private static void InitCompletedCallback( SESDKInitCompletedCallback  callback)
+        // {
+        //     initCompletedCallback_miniGame=callback;
+        // }
+        // private static void AttributionCompletedCallback( SEAttributionCallback callback)
+        // {
+        //     attCompletedCallback_miniGame=callback;
+       // }
         private static InitParams initSDKInitParams( SEConfig config)
         {
+            // if(config.initCompletedCallback==null&& initCompletedCallback_miniGame!=null)
+            //     config.initCompletedCallback = initCompletedCallback_miniGame;
+            // if(config.attributionCallback==null&& attCompletedCallback_miniGame!=null)
+            //     config.attributionCallback = attCompletedCallback_miniGame;
               InitParams initParams = new InitParams();
 
             if (config.initCompletedCallback != null)
@@ -60,7 +75,6 @@ namespace SolarEngine
                         config.initCompletedCallback.Target, config.initCompletedCallback.Method);
                 initParams.miniGameInitCompletedCallback = initCompletedCallback;
             }
-
             if (config.attributionCallback != null)
             {
                 SolarEngineSDK4MiniGames.MiniGameAttributionCallback attributionCallback =
@@ -314,14 +328,14 @@ namespace SolarEngine
            private static void TrackCreateRole(CreateRoleAttributes attributes)
         {
 #if SOLARENGINE_WECHAT
-            SolarEngineSDK4MiniGames.trackCreateRole(getCreateRoleDic(attributes),null,attributes.reportingToTencentSdk);
+            SolarEngineSDK4MiniGames.trackCreateRole(getCreateRoleDic(attributes),attributes.customProperties,attributes.reportingToTencentSdk);
  #endif
         }
 
            private static void TrackTutorialFinish(TutorialFinishAttributes attributes)
         {
 #if SOLARENGINE_WECHAT
-            SolarEngineSDK4MiniGames.trackTutorialFinish(getTutorialFinishDic(attributes),null,attributes.reportingToTencentSdk );
+            SolarEngineSDK4MiniGames.trackTutorialFinish(getTutorialFinishDic(attributes),attributes.customProperties,attributes.reportingToTencentSdk );
 #endif            
         }
 

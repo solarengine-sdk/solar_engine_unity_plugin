@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<dependencies>
+  <iosPods>
+    <iosPod name="SESDKODMInfo" version="1.0.0.1" />
+    <iosPod name="GoogleUtilities" version="8.1" />
+    <iosPod name="nanopb" version="3.30910.0" />
+    <iosPod name="GoogleAdsOnDeviceConversion" version="2.1.0" />
+  </iosPods>
+</dependencies>
