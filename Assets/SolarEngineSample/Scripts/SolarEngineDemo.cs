@@ -34,7 +34,8 @@ public class SolarEngineDemo : MonoBehaviour
         initParams.openid = "openid";
         SEConfig seConfig = new SEConfig();
         seConfig.attAuthorizationWaitingInterval = 120;
-        
+       //seConfig.enableIPV6 = false;
+
         ///如接入腾讯广告SDK，请添加以下代码
         TencentAdvertisingGameSDKInitParams tencentAdvertisingGameSDKInitParams = new TencentAdvertisingGameSDKInitParams();
         
@@ -69,14 +70,14 @@ public class SolarEngineDemo : MonoBehaviour
             { "customIDUserProperties", "test" }, { "age", 18 }
         };
         seConfig.logEnabled = true;
-        seConfig.isDebugModel = true;
+        seConfig.isDebugModel = false;
         
      
         //delayDeeplinkEnable
         seConfig.delayDeeplinkEnable = true;  
        seConfig.deferredDeeplinkenable=true;     
          setDelayDeeplinkCompletionHandler();
-        
+         seConfig.attAuthorizationWaitingInterval = 120;
         Analytics.deeplinkCompletionHandler(deeplinkCallback);
         Analytics.delayDeeplinkCompletionHandler(delayDeeplinkCallback);
         

@@ -70,6 +70,11 @@ namespace SolarEngine.Build
                 var appproguardPath = Path.Combine(Application.dataPath, "Plugins/Android/proguard-user.txt");
                 var seproguardPath =
                     Path.Combine(Application.dataPath, "Plugins/SolarEngine/Android/proguard-user.txt");
+                if ( PackageChecker.IsUPMPackageInstalled())
+                {
+                    seproguardPath =
+                        Path.Combine(PackageChecker.GetPackagePath(), "Runtime/Plugins/Android/proguard-user.txt");
+                }
 
 
                 if (!File.Exists(appproguardPath))
@@ -167,6 +172,12 @@ namespace SolarEngine.Build
                 Path.Combine(Application.dataPath, "Plugins/SolarEngine/Android/AndroidManifest.xml");
             var appManifestPath = Path.Combine(Application.dataPath, "Plugins/Android/AndroidManifest.xml");
             var manifestHasChanged = false;
+            if (PackageChecker.IsUPMPackageInstalled())
+            {
+                seManifestPath =
+                    Path.Combine(PackageChecker. GetPackagePath(), "Runtime/Plugins/Android/AndroidManifest.xml");
+            }
+
             if (!File.Exists(appManifestPath))
             {
                 if (!Directory.Exists(androidPluginsPath))
@@ -438,7 +449,7 @@ namespace SolarEngine.Build
 
 
         private static string PackageName = "@solarengine/core";
-        private static string _harVersion = "1.1.0"; // 仅版本号，不带 
+        private static string _harVersion = "1.3.0"; // 仅版本号，不带 
         
         
         private static string HarVersion = string.IsNullOrEmpty(SolarEngineSettings.OpenHarmonyVersion)

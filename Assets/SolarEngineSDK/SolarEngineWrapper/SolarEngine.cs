@@ -11,14 +11,12 @@ namespace SolarEngine
     public partial class Analytics : MonoBehaviour
     {
         private SEAttributionCallback attributionCallback_private = null;
-        
+
 
         public delegate void SEAttributionCallback(int code, Dictionary<string, object> attribution);
 
-        private  SESDKInitCompletedCallback initCompletedCallback_private = null;
+        private SESDKInitCompletedCallback initCompletedCallback_private = null;
 
-      
-    
 
         public delegate void SESDKInitCompletedCallback(int code);
 
@@ -64,6 +62,7 @@ namespace SolarEngine
                     {
                         GameObject am = new GameObject("Analytics");
                         _instance = am.AddComponent(typeof(Analytics)) as Analytics;
+                        DontDestroyOnLoad(am);
                     }
                 }
 
@@ -196,7 +195,7 @@ namespace SolarEngine
 //
 //             InitCompletedCallback(callback);
 //         }
-        
+
         public static Dictionary<string, object> getAttribution()
         {
             string attributionString = GetAttribution();
@@ -239,30 +238,35 @@ namespace SolarEngine
 #if UNITY_OPENHARMONY&&!UNITY_EDITOR
         public static void getVisitorId(Action<string> callback)
         {
-             GetVisitorID(callback);
+            GetVisitorID(callback);
         }
-    
-        public static void getDistinctId(Action<string>distinct)
+
+        public static void getDistinctId(Action<string> distinct)
         {
             GetDistinctId(distinct);
-        }   
-        
+        }
+
         /// <summary>
         /// 获取设备、用户相关信息'
         /// <returns>设备、用户相关信息</returns>
         /// </summary>
-        public static void getPresetProperties(Action<Dictionary<string ,object>>properties)
+        public static void getPresetProperties(Action<Dictionary<string, object>> properties)
         {
-             GetPresetProperties(properties);
+            GetPresetProperties(properties);
         }
-         
-      
-        public static void requestPermissionsFromUser(Action<int>  callback)
+
+        public static void authorizationCompleted()
+        {
+             AuthorizationCompleted();
+        }
+
+        public static void requestPermissionsFromUser(Action<int> callback)
         {
             RequestPermissionsFromUser(callback);
-            
         }
+
 #else
+
         /// <summary>
         /// 获取访客 ID
         /// </summary>
@@ -290,6 +294,7 @@ namespace SolarEngine
         {
             return GetPresetProperties();
         }
+
 #endif
 
         /// <summary>
@@ -444,6 +449,7 @@ namespace SolarEngine
         {
             TrackAppReEngagement(customAttributes);
         }
+
         /// <summary>
         /// 上报变现广告展示事件
         /// </summary>
@@ -742,13 +748,12 @@ namespace SolarEngine
         /// <param name="callback">delayDeeplink回调</param>
         /// </summary>
         [Obsolete("This method is obsolete. Please use deferredDeeplinkCompletionHandler.")]
-
         public static void delayDeeplinkCompletionHandler(SESDKDeferredDeeplinkCallback callback)
         {
             DelayDeeplinkCompletionHandler(callback);
         }
-        
-        
+
+
         public static void deferredDeeplinkCompletionHandler(SESDKDeferredDeeplinkCallback callback)
         {
             DelayDeeplinkCompletionHandler(callback);

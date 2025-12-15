@@ -138,42 +138,96 @@ namespace SolarEngine
             bool openHarmony = false;
 
             bool odminfo = false;
+            bool installed = PackageChecker.IsUPMPackageInstalled("com.solarengine.sdk");
+         
+            
+            
+            //
+            // if (!SolarEngineSettings.isUseiOS)
+            //     ios = PluginsEdtior.disableiOS();
+            // else
+            // {
+            //     ios = PluginsEdtior.showiOS();
+            // }
+            //
+            // if (!SolarEngineSettings.isUseAndroid)
+            //     android = PluginsEdtior.disableAndroid();
+            // else
+            // {
+            //     android = PluginsEdtior.showAndroid();
+            // }
+            //
+            // if (!SolarEngineSettings.isUseMiniGame)
+            //     miniGame = PluginsEdtior.disableMiniGame();
+            // else
+            // {
+            //     miniGame = PluginsEdtior.showMiniGame();
+            // }
+            //
+            //
+            //
+            // if (!SolarEngineSettings.isUseOpenHarmony)
+            //     openHarmony = PluginsEdtior.disableOpenHarmony();
+            // else
+            // {
+            //     openHarmony = PluginsEdtior.showOpenHarmony();
+            // }
 
-            if (!SolarEngineSettings.isUseiOS)
-                ios = PluginsEdtior.disableiOS();
-            else
+            
+            
+            if (!installed)
             {
-                ios = PluginsEdtior.showiOS();
+                if (!SolarEngineSettings.isUseiOS)
+                    ios = PluginsEdtior.disableiOS();
+                else
+                {
+                    ios = PluginsEdtior.showiOS();
+                }
+
+                if (!SolarEngineSettings.isUseAndroid)
+                    android = PluginsEdtior.disableAndroid();
+                else
+                {
+                    android = PluginsEdtior.showAndroid();
+                }
+
+                if (!SolarEngineSettings.isUseMiniGame)
+                    miniGame = PluginsEdtior.disableMiniGame();
+                else
+                {
+                    miniGame = PluginsEdtior.showMiniGame();
+                }
+                if (!SolarEngineSettings.isUseOpenHarmony)
+                    openHarmony = PluginsEdtior.disableOpenHarmony();
+                else
+                {
+                    openHarmony = PluginsEdtior.showOpenHarmony();
+                }
+                if (SolarEngineSettings.isUseMacOS)
+                    PluginsEdtior.showMacOS();
+                else
+                    PluginsEdtior.disableMacOS();
+            }else
+            {
+                ios = true;
+                android = true;
+                miniGame = true;
+
+                openHarmony = true;
+                Debug.Log("Installed via UPM: not support disable remoteconfig");
+
             }
 
-            if (!SolarEngineSettings.isUseAndroid)
-                android = PluginsEdtior.disableAndroid();
-            else
-            {
-                android = PluginsEdtior.showAndroid();
-            }
-
-            if (!SolarEngineSettings.isUseMiniGame)
-                miniGame = PluginsEdtior.disableMiniGame();
-            else
-            {
-                miniGame = PluginsEdtior.showMiniGame();
-            }
-
+            
+            
+            if(SolarEngineSettings.isCN)
+                SolarEngineSettings.isUseOaid=true;
             if (!SolarEngineSettings.isUseOaid)
                 oaid = PluginsEdtior.disableOaid();
             else
             {
                 oaid = PluginsEdtior.showOaid();
             }
-
-            if (!SolarEngineSettings.isUseOpenHarmony)
-                openHarmony = PluginsEdtior.disableOpenHarmony();
-            else
-            {
-                openHarmony = PluginsEdtior.showOpenHarmony();
-            }
-
 
             if (!SolarEngineSettings.isUseODMInfo || SolarEngineSettings.isCN)
                 odminfo = PluginsEdtior.disableODMInfo();
@@ -186,10 +240,7 @@ namespace SolarEngine
                 odminfo = PluginsEdtior.disableODMInfo();
             }
 
-            if (SolarEngineSettings.isUseMacOS)
-                PluginsEdtior.showMacOS();
-            else
-                PluginsEdtior.disableMacOS();
+          
             return ios && android && miniGame && oaid && odminfo && openHarmony;
         }
 

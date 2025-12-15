@@ -41,7 +41,7 @@ public class PluginsEdtior : MonoBehaviour
    private const string MiniGameRemoteConfigsPathMiniDll = PluginsSolarEnginePath+"MiniGame/MiniGameRemoteConfig.dll";
    
    private const string RemoteConfigsPathOpenHarCS = "Assets/SolarEngineSDK/RemoteConfigWrapper/SESDKRemoteConfigOpenHarmonyWrapper.cs";
-   private const string RemoteConfigsPathOpenHar = "Assets/Plugins/OpenHarmony/SolarEngine/RemoteConfig";
+   // private const string RemoteConfigsPathOpenHar = "Assets/Plugins/OpenHarmony/SolarEngine/RemoteConfig";
 
    
    //iospath
@@ -129,7 +129,7 @@ public class PluginsEdtior : MonoBehaviour
 
        DefineSymbolsEditor.delete_DISABLE_REMOTECONFIG(BuildTargetGroup.OpenHarmony,false);
 #endif
-       return  ShowPath(RemoteConfigsPathOpenHar)&&ShowFile(RemoteConfigsPathOpenHarCS) ;
+       return ShowFile(RemoteConfigsPathOpenHarCS) ;
 
    }
    public static bool disableOpenHarmony()
@@ -138,7 +138,7 @@ public class PluginsEdtior : MonoBehaviour
 
        DefineSymbolsEditor.add_DISABLE_REMOTECONFIG(BuildTargetGroup.OpenHarmony,false);
 #endif
-       return HidePath(RemoteConfigsPathOpenHar)&&HideFile(RemoteConfigsPathOpenHarCS);
+       return HideFile(RemoteConfigsPathOpenHarCS);
     
    }
 

@@ -19,6 +19,15 @@ import { JSON } from '@kit.ArkTS';
 export const _log: boolean = true;
 export const _SolarEngineLog: string = "[SeSDKBridge]:";
 
+export function RegisterSEOpenHarmonyProxy() {
+
+    let register :Record<string,object>= {} ;
+    register["SEOpenHarmonyProxy"] =  SEOpenHarmonyProxy;
+
+    return register;
+}
+
+
 
 export class SEOpenHarmonyProxy {
 
@@ -58,6 +67,8 @@ export class SEOpenHarmonyProxy {
             solarEngineConfig.isDebugMode = configObj[SolarEngineConfigConstant.IsDebugModel];
             solarEngineConfig.logEnabled = configObj[SolarEngineConfigConstant.LogEnabled];
             solarEngineConfig.enableDeferredDeeplink = configObj[SolarEngineConfigConstant.EnableDelayDeeplink];
+            solarEngineConfig.authorizationTimeout=configObj[SolarEngineConfigConstant.AuthorizationTimeout];
+            solarEngineConfig.enableIPV6=configObj[SolarEngineConfigConstant.EnableIPV6];
             const  sdkSource=new  SeSdkSource();
             sdkSource.subLibVersion=configObj[SolarEngineConfigConstant.SubLibVersion];
             sdkSource.sdkType=configObj[SolarEngineConfigConstant.SdkType];
@@ -851,6 +862,16 @@ export class SEOpenHarmonyProxy {
         }
       
     }
+    static authorizationCompleted(){
+        if (_log) {
+            console.log(_SolarEngineLog, "authorizationCompleted");
+        }
+        try {
+            SolarEngineManager.authorizationCompleted();
+        } catch (error) {
+            console.error(`${_SolarEngineLog} authorizationCompleted failed:`, error);
+        }
+    }
     static requestPermissionsFromUser(callback: (code: number) => void){
         const atManager: abilityAccessCtrl.AtManager = abilityAccessCtrl.createAtManager();
         atManager.requestPermissionsFromUser(globalThis.context, ["ohos.permission.APP_TRACKING_CONSENT"]).then((data) => {
@@ -900,9 +921,11 @@ export class SolarEngineConfigConstant {
     public static readonly IsDebugModel = "isDebugModel";
     public static readonly LogEnabled = "logEnabled";
     public static readonly EnableDelayDeeplink = "delayDeeplinkEnable";
+    public static readonly AuthorizationTimeout="authorizationTimeout";
+    public static readonly EnableIPV6="enableIPV6";
 
     public static readonly SubLibVersion="sub_lib_version";
-    public static readonly  SdkType="sdk_type";
+    public static readonly SdkType="sdk_type";
 
     public static readonly RcConfig = "rcConfig";
     public static readonly RCEnable = "enable";

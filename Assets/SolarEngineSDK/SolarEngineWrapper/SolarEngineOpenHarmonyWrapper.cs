@@ -310,6 +310,10 @@ namespace SolarEngine
             openHarmonyJSClass.CallStatic("setDelayDeepLinkListener", delaydeeplinkCalllback);
         }
 
+        private static void AuthorizationCompleted()
+        {
+            openHarmonyJSClass.CallStatic("authorizationCompleted");
+        }
         private static void RequestPermissionsFromUser(Action<int> callback)
         {
             getRequestPermission_private = callback;

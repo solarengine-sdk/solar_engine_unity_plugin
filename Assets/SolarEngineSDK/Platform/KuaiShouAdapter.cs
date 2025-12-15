@@ -12,7 +12,9 @@ public class KuaiShouAdapter : SEAdapterInterface
 {
     public SEDeviceInfo setDeviceInfo()
     {
-      
+       
+       
+        
 #if UNITY_EDITOR
         return new SEDeviceInfo();
 #endif
@@ -85,6 +87,7 @@ return;
 
     public bool hasKey(string key)
     {
+       
 #if UNITY_EDITOR
         return  UnityEngine.PlayerPrefs.HasKey(key);
 #endif
@@ -180,7 +183,7 @@ return;
 #if UNITY_EDITOR
         return new EnterOptionsInfo();
 #endif
-        var info = KS.GetLaunchOptionSync();
+        var info = KS.GetLaunchOptionsSync();
         Debug.Log("getEnterOptionsInfo:" + info);
         return new EnterOptionsInfo
         {
@@ -192,44 +195,64 @@ return;
 
     public void login(SEAdapterInterface.OnLoginSuccessCallback successCallback, SEAdapterInterface.OnLoginFailedCallback failedCallback, bool forceLogin = true)
     {
+      
+      
 #if UNITY_EDITOR
         return ;
 #endif
-        KS.Login((ret) =>
+        var option = new LoginOption
         {
-            successCallback?.Invoke(ret.code, "", true);
-            
-        }, (code, msg) =>
-        {
-            failedCallback?.Invoke(msg);
-        });
+            success = (LoginSuccessCallbackResult result) =>
+            {
+                Debug.Log("login success:code" + result.code );
+                Debug.Log("login success:errMsg" + result.errMsg);
+                successCallback?.Invoke(result.code, "", true);
+            },
 
+            fail = (KSGeneralCallbackResult err) =>
+            {
+                Debug.Log("login failed:" + err);
+                failedCallback?.Invoke(err.msg);
+            },
+
+            complete = (GeneralCallbackResult completeResult) =>
+            {
+                Debug.Log("completeResult）");
+            },
+
+           
+        };
+
+      
+        KS.Login( option);
       
     }
 
     public void triggerOnShow(SEAdapterInterface.OnShowEvent showEvent)
     {
-        
+      
      
   #if UNITY_EDITOR
         return;
 #endif
         KS.OnShow(result =>
         {
-            showEvent?.Invoke(result.showFrom, result.query, new ());
+            showEvent?.Invoke("", result.query, new ());
         });
+     
     }
 
     public void triggerOnHide(SEAdapterInterface.OnHideEvent hideEvent)
     {
+       
 #if UNITY_EDITOR
         return;
 #endif
-        
-        KS.OnHide(result =>
+        KS.OnHide(() =>
         {
             hideEvent?.Invoke();
         });
+     
         
       
     }
@@ -238,12 +261,12 @@ return;
     {
         return "kwai";
     }
- public string getsubmptype()
+    public string getsubmptype()
         {
          
               return "native";
         }
-   public void init()
+    public void init()
         {
            
          

@@ -406,6 +406,10 @@ void __iOSSolarEngineSDKInit(const char * appKey, const char * SEUserId, const c
     config.setKidsAppEnabled = [seDict[@"isKidsAppEnabled"] boolValue];
     config.enable2GReporting = [seDict[@"isEnable2GReporting"] boolValue];
     config.isGDPRArea = [seDict[@"isGDPRArea"] boolValue];
+    
+    if (seDict[@"enableIPV6"]) {
+        config.enableIPV6 = [seDict[@"enableIPV6"] boolValue];
+    }
     config.attAuthorizationWaitingInterval = [seDict[@"attAuthorizationWaitingInterval"] intValue];
 #if  __has_include(<SolarEngineSDK/SESDKForCN.h>)
         if (seDict[@"caid"]) {

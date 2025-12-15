@@ -5,9 +5,16 @@ import {
     RemoteConfigManager,
     safeBoxingConfigItem, stringItem
 } from '@solarengine/remoteconfig';
-import {SEOpenHarmonyProxy, _log, _SolarEngineLog} from '../SEOpenHarmonyProxy';
+import {SEOpenHarmonyProxy, _log, _SolarEngineLog} from './SEOpenHarmonyProxy';
 
 
+export function RegisterSERCOpenHarmonyProxy() {
+
+    let register :Record<string,object>= {} ;
+    register["SERCOpenHarmonyProxy"] =  SERCOpenHarmonyProxy;
+
+    return register;
+}
 export class SERCOpenHarmonyProxy {
 
 

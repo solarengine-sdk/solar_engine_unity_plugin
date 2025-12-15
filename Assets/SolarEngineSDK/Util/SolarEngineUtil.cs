@@ -65,6 +65,8 @@ namespace SolarEngine
 #endif
             seDict.Add("isCoppaEnabled", config.isCoppaEnabled);
             seDict.Add("isKidsAppEnabled", config.isKidsAppEnabled);
+            seDict.Add("enableIPV6", config.enableIPV6);
+            seDict.Add("authorizationTimeout", config.authorizationTimeout);
             if (config.customDomain.enable)
             {
                 Dictionary<string, object> customDomainDict = new Dictionary<string, object>();
@@ -863,8 +865,15 @@ namespace SolarEngine
         public string caid { get; set; }
         public SECustomDomain customDomain;
 
-        // iOS odmInfo；只有iOS调用有效。（仅非中国大陆设置有效）
-        // public bool odmInfoEnable { get; set; }
+
+        public bool enableIPV6
+        {
+            get => _enableIPV6;
+            set => _enableIPV6 = value;
+        }
+
+        private static bool _enableIPV6 = true;
+        public int authorizationTimeout;
 
         // 设置获取归因结果回调，可选字段
         public Analytics.SEAttributionCallback attributionCallback { get; set; }
